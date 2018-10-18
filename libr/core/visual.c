@@ -1834,6 +1834,8 @@ R_API int r_core_visual_cmd(RCore *core, const char *arg) {
 	const char *key_s;
 	int i, ret, cols = core->print->cols, delta = 0;
 	int wheelspeed;
+	r_cons_show_cursor (false);
+	r_cons_set_raw (1);
 	if ((ut8)ch == KEY_ALTQ) {
 		r_cons_readchar ();
 		ch = 'q';
@@ -3256,7 +3258,7 @@ R_API int r_core_visual(RCore *core, const char *input) {
 	core->print->flags |= R_PRINT_FLAGS_ADDRMOD;
 	do {
 dodo:
-		r_core_visual_tab_update(core);
+		r_core_visual_tab_update (core);
 		// update the cursor when it's not visible anymore
 		skip = fix_cursor (core);
 		const int ref = r_config_get_i (core->config, "dbg.slow");
